@@ -1,0 +1,30 @@
+# Food Help Crawler — Brief
+**Date:** 2025-10-28
+
+## Mission
+Ship a ToS-friendly, public web app that aggregates and publishes **food assistance** (pantries, mobile distributions, school meals, mutual aid) with a map and a community submission form.
+
+## Why
+Potential SNAP disruptions increase the need for rapidly discoverable, verified food resources. This app helps communities find help fast.
+
+## Scope (MVP)
+- **Crawler** (Python): Harvest from Bluesky, Mastodon, Reddit, YouTube, RSS. Normalize and push to **Supabase** (or **Google Sheets** if `SINK=gsheets`).
+- **Web** (Next.js): Map and list of events from Supabase. Filters for city/state. Public **/submit** page writes to `public.submissions` for moderation.
+- **Regions seeded**: Georgia; Grand Rapids & West Michigan, MI.
+
+## Non-Goals (MVP)
+- No X/Twitter or Meta scraping. Only official APIs/RSS.
+- No full admin dashboard (optional future).
+
+## Architecture
+- `/crawler`: Python connectors + classifier + geocoder + sink abstraction.
+- `/supabase`: SQL schema for `posts`, `events`, **`submissions`** with RLS policies.
+- `/web`: Next.js 14 app with Leaflet map, filters, and submission form.
+
+## Outputs
+- **Supabase** (default): `events` table powers the map.  
+- **Google Sheets** (optional): public transparency and sharing (`SINK=gsheets`).
+
+## Security
+- Secrets in `.env` files only. Never commit secrets.  
+- RLS: anonymous **insert** allowed on `submissions`, select only if `verified=true` (policy included).
