@@ -11,6 +11,14 @@ Find and surface real-time **food assistance posts** (food distributions, pantri
 ## Regions
 Seeded for **Georgia** and **Grand Rapids/West Michigan, MI** via `crawler/config/sources.yaml`.
 
+### Verifier & Sources
+- Trusted domains live in `crawler/lib/verifier.py`. Matches on host substring; add your local partners here for instant “Verified”.
+- Region seeds & feeds live in `crawler/config/sources.yaml`. Add official food bank RSS and city 211 pages.
+
+### Google Sheets mode
+- Set `SINK=gsheets` and provide `GOOGLE_SHEETS_DOC_ID` + `GOOGLE_SERVICE_ACCOUNT_JSON`.
+- In CI we auto-write `service_account.json` from the GitHub Secret if provided.
+
 ## ToS & Legal
 - No scraping of forbidden platforms. APIs/RSS only.
 - Respect geocoding provider rate limits.

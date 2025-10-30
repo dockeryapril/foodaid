@@ -1,6 +1,7 @@
 TRUSTED_DOMAINS = [
-    # "acfb.org",      # Atlanta Community Food Bank (confirm)
-    # "feedwm.org"     # Feeding America West Michigan (confirm)
+    "acfb.org",     # Atlanta Community Food Bank
+    "feedwm.org",   # Feeding America West Michigan
+    "211.org", "211la.org", "211sandiego.org", "211wisconsin.org"  # 211 network (sample)
 ]
 
 def verify(url: str, organizer: str = None):

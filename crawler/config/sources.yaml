@@ -5,18 +5,23 @@ regions:
     youtube_queries:
       - 'Atlanta food distribution'
       - 'Georgia food bank distribution'
-    rss_feeds: []
+      - 'Mobile pantry Atlanta'
+    rss_feeds:
+      - 'https://www.acfb.org/feed/'            # Atlanta Community Food Bank (news/events)
+      - 'https://www.foodpantries.org/feed'     # National directory (noisy; filtered later)
   - key: "Grand Rapids, MI"
     reddit_subs: [GrandRapids, Michigan, WestMichigan, assistance, food_pantry, mutualaid]
     mastodon_instances: ["https://mastodon.social"]
     youtube_queries:
       - 'Grand Rapids food distribution'
-      - 'West Michigan food bank distribution'
-    rss_feeds: []
+      - 'Grand Rapids mobile pantry'
+    rss_feeds:
+      - 'https://www.feedwm.org/feed/'          # Feeding America West Michigan
   - key: "West Michigan"
     reddit_subs: [WestMichigan, GrandRapids, Michigan, assistance, food_pantry, mutualaid]
     mastodon_instances: ["https://mastodon.social"]
     youtube_queries:
       - 'West Michigan food pantry'
       - 'Holland MI food distribution'
-    rss_feeds: []
+    rss_feeds:
+      - 'https://www.feedwm.org/feed/'

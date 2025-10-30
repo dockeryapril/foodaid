@@ -22,7 +22,7 @@ jobs:
       - name: Run crawl
         working-directory: crawler
         env:
-          SINK: supabase
+          SINK: ${{ secrets.SINK || 'supabase' }}
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
           BLUESKY_HANDLE: ${{ secrets.BLUESKY_HANDLE }}
@@ -36,5 +36,11 @@ jobs:
           GOOGLE_SHEETS_DOC_ID: ${{ secrets.GOOGLE_SHEETS_DOC_ID }}
           GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
         run: |
+          set -e
+          # If a Google SA JSON secret was provided (as a single-line JSON), write it to a file.
+          if [ -n "${GOOGLE_SERVICE_ACCOUNT_JSON}" ]; then
+            echo "${GOOGLE_SERVICE_ACCOUNT_JSON}" > service_account.json
+            export GOOGLE_SERVICE_ACCOUNT_JSON="$(pwd)/service_account.json"
+          fi
           source .venv/bin/activate
           python run_all.py --regions "GA,Grand Rapids, MI, West Michigan"
